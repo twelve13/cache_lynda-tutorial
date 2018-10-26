@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/twelve13/cache-mongo-node-react#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mongodb": "^3.1.8",
     "react": "^16.6.0",

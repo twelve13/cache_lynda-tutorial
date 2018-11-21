@@ -3,25 +3,20 @@ import apiRouter from "./api";
 import express from "express";
 
 const server = express();
-
-//ejs is for effective javascript templating.  set view engine to ejs
 server.set('view engine', 'ejs');
 
-//for learning purposes only
-console.log(`the export from the config file is ${config}`);
-//$ ./node_modules/.bin/babel-node server.js will spit ^that out in the terminal
 
-//server.get('/', (req, res) => {
-//	res.send('a message from Express!');
-//});
-//in one terminal tab run $npm start, it'll say Express listening on port 8080
-//in another terminal tab run $curl http://localhost:8080/ and you should see ^message
-//or in web browser go to localhost:8080 to see message
+import serverRender from "./serverRender";
 
 server.get('/', (req, res) => {
-	res.render('index', {
-		content: "This is from the ejs file"
-	});
+	serverRender()
+		.then(content => {
+			res.render("index", {
+				content
+			});
+		})
+		.catch(console.error)
+	
 });
 
 server.get('/somepage.html', (req, res) => {

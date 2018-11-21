@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ejs learning page</title>
-</head>
-<body>
-	<h1>EJS</h1>
-	<%= Math.random() %>
-	<div id="root"><%= content %></div>
-	
-</body>
-</html>
+<%- include('header') -%>
+
+<div id="root"><%- content -%></div>
+
+<%- include('footer') -%>

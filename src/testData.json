@@ -1,0 +1,9 @@
+{
+"accounts" : [
+	{"id": 1, "name": "Mortgage", "suggested": 600, "current_amount": 0, "notes": "every 2nd Wednesday", "status": "All Good"},
+	{"id": 2, "name": "Food", "suggested": 200, "current_amount": 100, "notes": "", "status": "All Good"},
+	{"id": 3, "name": "Pets", "suggested": 25, "current_amount": 25, "notes": "", "status": "All Good"},
+	{"id": 4, "name": "Fun", "suggested": 100, "current_amount": 15, "notes": "", "status": "All Good"},
+	{"id": 5, "name": "Car", "suggested": 50, "current_amount": 5, "notes": "oil change soon", "status": "All Good"}
+]
+}

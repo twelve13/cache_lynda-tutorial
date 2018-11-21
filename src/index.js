@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./components/App";
 
-ReactDom.render(
-	React.createElement("h2", null, "hello react"),
+
+ReactDOM.render(
+	<App initialAccounts = {[]} />,
 	document.getElementById("root")
 );
+
+
+

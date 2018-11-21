@@ -1,8 +1,14 @@
 import config from "./config";
 import apiRouter from "./api";
 import express from "express";
+import sassMiddleware from "node-sass-middleware";
+import path from "path";
 
 const server = express();
+server.use(sassMiddleware({
+	src: path.join(__dirname, "scss"),
+	dest: path.join(__dirname, "public")
+}));
 server.set('view engine', 'ejs');
 
 
@@ -10,9 +16,10 @@ import serverRender from "./serverRender";
 
 server.get('/', (req, res) => {
 	serverRender()
-		.then(content => {
+		.then(({ initialMarkup, initialData }) => {
 			res.render("index", {
-				content
+				initialMarkup,
+				initialData
 			});
 		})
 		.catch(console.error)
@@ -22,15 +29,7 @@ server.get('/', (req, res) => {
 server.get('/somepage.html', (req, res) => {
 	res.send('this is a static string');
 });
-//in another terminal tab run $curl http://localhost:8080/somepage.html and you should see ^message
 
-// server.get('/learningpage.html', (req, res) => {
-// 	fs.readFile('./learningpage.html', (err, data) => {
-// 		res.send(data.toString());
-// 	});
-// });
-
-//don't even need any of that if you do
 server.use(express.static('public'));
 
 server.use("/api", apiRouter);

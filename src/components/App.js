@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Header from "./Header";
-import Account from "./Account"; 
-import data from "../testData";
-import axios from "axios";
+import AccountsList from "./AccountsList"
 
-
-console.log(data.accounts);
+const pushState = (obj, url) =>
+  window.history.pushState(obj, "", url);
 
 class App extends Component {
 	state = {
@@ -13,15 +11,19 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-    axios.get("/api/accounts")
-    .then(resp => {
-      this.setState({
-        accounts: resp.data.accounts
-      });
-    })
-    .catch(console.error);
 
 	}
+
+  fetchAccount = (accountId) => {
+    pushState(
+      { currentAccountId: accountId },
+      `/account/${accountId}`
+    );
+
+    this.setState({
+      pageHeader: this.state.accounts[accountId].name
+    });
+  };
 
 
   render() {
@@ -30,9 +32,10 @@ class App extends Component {
     return (
     	
       <div className="App">
-        <Header />
-        <p>This is app.js testtesttest</p>
-        {this.state.accounts.map(account => <Account key={account.id} {...account}/>)}
+        <Header message={this.state.pageHeader}/>
+        <AccountsList 
+          onAccountClick = {this.fetchAccount}
+          accounts={this.state.accounts} />
       </div>
     );
   }

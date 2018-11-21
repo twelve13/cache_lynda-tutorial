@@ -4,9 +4,12 @@ import App from "./components/App";
 
 
 ReactDOM.render(
-	<App initialAccounts = {[]} />,
+	<App initialAccounts = {window.initialData.accounts} />,
 	document.getElementById("root")
 );
+  
+
+
 
 
 

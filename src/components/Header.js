@@ -1,8 +1,9 @@
 import React from "react";
 
-const Header = () => (
+const Header = ({message}) => (
 	<header>
-		<h1>Cache React App!</h1>
+		<h1>Cache React App Header</h1>
+		{message}
 	</header>
 );
 

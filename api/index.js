@@ -13,4 +13,10 @@ router.get("/accounts", (req, res) => {
 	});
 });
 
+router.get("/accounts/:accountId", (req, res) => {
+	let account = accounts[req.params.accountId];
+	account.withdrawals = "Placeholder for withdrawals info";
+	res.send(account);
+});
+
 export default router;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Account extends Component {
 	handleClick = () => {
-		this.props.onClick(this.props.id);
+		this.props.onClick(this.props.name);
 	}
 
 	render() {

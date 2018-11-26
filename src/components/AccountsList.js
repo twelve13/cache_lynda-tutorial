@@ -3,11 +3,11 @@ import Account from "./Account";
 
 const AccountsList = ({ accounts, onAccountClick }) => (
 	<div className="accounts-wrapper">
-		{Object.keys(accounts).map(accountId => 
+		{Object.keys(accounts).map(accountName => 
 			<Account 
-				key={accountId} 
+				key={accountName} 
 				onClick={onAccountClick}
-				{...accounts[accountId]}/>)}
+				{...accounts[accountName]}/>)}
 	</div>
 )
 

@@ -52,3 +52,9 @@ accounts.forEach((account, i) => {
 		}
 	})
 });
+
+//in terminal run $node db/seeds.js
+//in another terminal tab run $mongo
+//>show dbs
+//>use cache-react-app
+//>db.accounts.find()pretty()

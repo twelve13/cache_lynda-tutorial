@@ -17,7 +17,7 @@ class App extends Component {
   componentDidMount() {
     onPopState((event) => {
       this.setState({
-        currentAccountId: (event.state || {}).currentAccount Id
+        currentAccountName: (event.state || {}).currentAccountName
       })
     });
   }
@@ -26,18 +26,18 @@ class App extends Component {
     onPopState(null);
   }
 
-  fetchAccount = (accountId) => {
+  fetchAccount = (accountName) => {
     pushState(
-      { currentAccountId: accountId },
-      `/account/${accountId}`
+      { currentAccountName: accountName },
+      `/account/${accountName}`
     );
 
-    api.fetchAccount(accountId).then(account => {
+    api.fetchAccount(accountName).then(account => {
       this.setState({
-        currentAccountId: account.id,
+        currentAccountName: account.name,
         accounts: {
           ...this.state.accounts,
-          [account.id]: account
+          [account.name]: account
         }
       });
     });
@@ -45,30 +45,30 @@ class App extends Component {
 
   fetchAccountList = () => {
     pushState(
-      { currentAccountId: null },
+      { currentAccountName: null },
       "/"
     );
 
     api.fetchAccountList().then(accounts => {
       this.setState({
-        currentAccountId: null,
+        currentAccountName: null,
         accounts
       });
     });
   };
 
   currentAccount() {
-    return this.state.accounts[this.state.currentAccountId];
+    return this.state.accounts[this.state.currentAccountName];
   }
 
   pageHeader() {
-    if (this.state.currentAccountId) {
+    if (this.state.currentAccountName) {
       return this.currentAccount().name;
     }
   }
 
   currentContent() {
-    if (this.state.currentAccountId) {
+    if (this.state.currentAccountName) {
       return <AccountInfo 
         accountListClick={this.fetchAccountList}
         {...this.currentAccount()} />

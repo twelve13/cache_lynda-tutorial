@@ -1,22 +1,48 @@
-import express from 'express';
-import data from "../src/testData";
+import express from "express";
+import { MongoClient } from "mongodb";
+import assert from "assert";
+import config from "../config";
 
-const router = express.Router();
-const accounts = data.accounts.reduce((obj, account) => {
-			obj[account.id] = account;
-			return obj;
-		}, {})
+let mdb;
 
-router.get("/accounts", (req, res) => {
-	res.send({ 
-		accounts: accounts
-	});
+//in version 2 of Mongo you would get the database object as an argument to the connect callback
+//in version 3 you now get a client object containing the database object instead
+MongoClient.connect("mongodb://localhost", (err, client) => {
+	assert.equal(null, err);
+
+	mdb = client.db("cache-react-app");
 });
 
-router.get("/accounts/:accountId", (req, res) => {
-	let account = accounts[req.params.accountId];
-	account.withdrawals = "Placeholder for withdrawals info";
-	res.send(account);
+const router = express.Router();
+
+router.get("/accounts", (req, res) => {
+	let accounts = {};
+	mdb.collection("accounts").find({})
+	//dont need all of the data here, like withdrawals and deposits, so "project" what's needed
+	.project({
+		name: 1,
+		suggested: 1,
+		current_amount: 1,
+		notes: 1, 
+		status: 1
+	})
+		.each((err, account) => {
+			assert.equal(null, err);
+
+			if (!account) { // no more accounts
+				res.send({accounts});
+				return;
+			}
+
+			accounts[account.name] = account;
+		});
+});
+
+router.get("/accounts/:accountName", (req, res) => {
+	mdb.collection("accounts")
+		.findOne({ name: req.params.accountName })
+		.then(account => res.send(account))
+		.catch(console.error)
 });
 
 export default router;

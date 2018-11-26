@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const fetchAccount = accountId => {
-	return axios.get(`/api/accounts/${accountId}`)
+export const fetchAccount = accountName => {
+	return axios.get(`/api/accounts/${accountName}`)
 		.then(resp => resp.data);
 };
 

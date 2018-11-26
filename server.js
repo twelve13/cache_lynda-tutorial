@@ -14,8 +14,8 @@ server.set('view engine', 'ejs');
 
 import serverRender from "./serverRender";
 
-server.get(['/', '/account/:accountId'], (req, res) => {
-	serverRender(req.params.accountId)
+server.get(['/', '/account/:accountName'], (req, res) => {
+	serverRender(req.params.name)
 		.then(({ initialMarkup, initialData }) => {
 			res.render("index", {
 				initialMarkup,
@@ -26,9 +26,6 @@ server.get(['/', '/account/:accountId'], (req, res) => {
 	
 });
 
-server.get('/somepage.html', (req, res) => {
-	res.send('this is a static string');
-});
 
 server.use(express.static('public'));
 

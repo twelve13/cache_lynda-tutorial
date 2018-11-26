@@ -6,19 +6,19 @@ import App from "./src/components/App";
 import config from "./config";
 import axios from "axios";
 
-const getApiUrl = accountId => {
-	if (accountId) {
-		return `${config.serverUrl}/api/accounts/${accountId}`;
+const getApiUrl = accountName => {
+	if (accountName) {
+		return `${config.serverUrl}/api/accounts/${accountName}`;
 	}
 	return `${config.serverUrl}/api/accounts`;
 };
 
-const getInitialData = (accountId, apiData) => {
-	if (accountId) {
+const getInitialData = (accountName, apiData) => {
+	if (accountName) {
 		return {
-			currentAccountId: apiData.id,
+			currentAccountName: apiData.name,
 			accounts: {
-				[apiData.id]: apiData
+				[apiData.name]: apiData
 			}
 		};
 	}
@@ -27,10 +27,10 @@ const getInitialData = (accountId, apiData) => {
 	};
 };
 
-const serverRender = (accountId) =>
-	axios.get(getApiUrl(accountId))
+const serverRender = (accountName) =>
+	axios.get(getApiUrl(accountName))
 		.then(resp => {
-			const initialData = getInitialData(accountId, resp.data);
+			const initialData = getInitialData(accountName, resp.data);
 			return {
 				initialMarkup: ReactDOMServer.renderToString(
 					<App initialData={initialData} />

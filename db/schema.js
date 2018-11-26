@@ -44,3 +44,5 @@ module.exports = {
 	Withdrawal: Withdrawal,
 	Deposit: Deposit
 };
+
+//in terminal run $node db/schema.js

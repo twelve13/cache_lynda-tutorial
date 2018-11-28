@@ -1,3 +1,14 @@
+body {
+	font-family: 'Bubbler One', sans-serif;
+}
+
+.header {
+	background-color: black;
+	color: white;
+	font-size: 72px;
+	padding: 5px 20px;
+}
+
 .accounts-wrapper {
 	display: flex;
 }
@@ -5,19 +16,48 @@
 .account {
 	border: solid 2px black;
 	border-radius: 20px;
-	margin: 10px;
+	margin: 20px 10px;
 	padding: 10px;
-	width: 200px;
+	text-align: center;
+	width: 225px;
+
+	&__name {
+		align-items: center;
+		background-color: black;
+		border-radius: 10px 10px 0 0;
+		color: white;
+		display: flex;
+		font-size: 36px;
+		justify-content: center;
+		margin-bottom: 10px;
+		padding: 10px 0;
+	}
+
+	&__current-amount {
+		border-bottom: solid 2px black;
+		font-size: 30px;
+		padding: 10px 0;
+	}
+
+	&__suggested-amount {
+		padding: 10px 0;
+	}
+
+	&__notes {
+		border-bottom: solid 2px black;
+		padding-bottom: 10px;
+	}
+
+	&__log {
+		padding-top: 10px;
+	}
 }
 
-.account-name {
-	align-items: center;
-	background-color: black;
-	border-radius: 10px 10px 0 0;
-	color: white;
-	display: flex;
-	font-size: 20px;
-	justify-content: center;
-	margin-bottom: 10px;
-	padding: 10px 0;
+.account-info {
+	&__name {
+		font-size: 36px;
+		text-align: center;
+	}
 }
+
+

@@ -18,14 +18,7 @@ const router = express.Router();
 router.get("/accounts", (req, res) => {
 	let accounts = {};
 	mdb.collection("accounts").find({})
-	//dont need all of the data here, like withdrawals and deposits, so "project" what's needed
-	.project({
-		name: 1,
-		suggested: 1,
-		current_amount: 1,
-		notes: 1, 
-		status: 1
-	})
+
 		.each((err, account) => {
 			assert.equal(null, err);
 

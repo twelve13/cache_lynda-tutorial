@@ -57,4 +57,4 @@ accounts.forEach((account, i) => {
 //in another terminal tab run $mongo
 //>show dbs
 //>use cache-react-app
-//>db.accounts.find()pretty()
+//>db.accounts.find().pretty()

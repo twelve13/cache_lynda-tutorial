@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 
 class Account extends Component {
-	handleClick = () => {
+	goToLog = () => {
 		this.props.onClick(this.props.name);
 	}
 
 	render() {
 		return (
-			<div className="account" onClick = {this.handleClick}>
-				<div className="account-name">{this.props.name}</div>
-				<div>Suggested: {this.props.suggested}</div>
-				<div>Notes: {this.props.notes}</div>
+			<div className="account">
+				<div className="account__name">{this.props.name}</div>
+				<div className="account__current-amount">${this.props.current_amount}</div>
+				<div className="account__suggested-amount">Suggested: {this.props.suggested}</div>
+				<div className="account__notes">Notes: {this.props.notes}</div>
+				<div className="account__log" onClick = {this.goToLog}>Log</div>
 			</div>
 		);
 	}

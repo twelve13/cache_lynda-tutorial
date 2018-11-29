@@ -7,7 +7,7 @@ let mdb;
 
 //in version 2 of Mongo you would get the database object as an argument to the connect callback
 //in version 3 you now get a client object containing the database object instead
-MongoClient.connect("mongodb://localhost", (err, client) => {
+MongoClient.connect("mongodb://localhost", { useNewUrlParser: true }, (err, client) => {
 	assert.equal(null, err);
 
 	mdb = client.db("cache-react-app");
@@ -35,6 +35,13 @@ router.get("/accounts/:accountName", (req, res) => {
 	mdb.collection("accounts")
 		.findOne({ name: req.params.accountName })
 		.then(account => res.send(account))
+		.catch(console.error)
+});
+
+router.post("/accounts", (req, res) => {
+	mdb.collection("accounts")
+		.insertOne(req.body)
+		.then(account => res.json(account))	
 		.catch(console.error)
 });
 

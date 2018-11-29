@@ -9,3 +9,8 @@ export const fetchAccountList = () => {
 	return axios.get("/api/accounts")
 		.then(resp => resp.data.accounts);
 };
+
+export const addAccount = (newAccount) => {
+	return axios.post("/api/accounts", {...newAccount })
+		.then(resp => resp.data);
+} 

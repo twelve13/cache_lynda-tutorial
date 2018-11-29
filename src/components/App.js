@@ -3,6 +3,7 @@ import Header from "./Header";
 import AccountsList from "./AccountsList";
 import AccountInfo from "./AccountInfo";
 import * as api from "../api";
+import AddAccount from "./AddAccount";
 
 const pushState = (obj, url) =>
   window.history.pushState(obj, "", url);
@@ -67,17 +68,23 @@ class App extends Component {
     }
   }
 
+  addAccount = (newAccount) => {
+    api.addAccount(newAccount)
+    .then(console.log({...this.state.accounts}))
+    .catch(console.error);
+  };
+
   currentContent() {
     if (this.state.currentAccountName) {
       return <AccountInfo 
         accountListClick={this.fetchAccountList}
+        addAccount = {this.addAccount}
         {...this.currentAccount()} />
     } 
       return <AccountsList onAccountClick = {this.fetchAccount}
       accounts = {this.state.accounts} />
     
   }
-
 
   render() {
     
@@ -87,6 +94,8 @@ class App extends Component {
       <div className="App">
         <Header message={this.pageHeader()} />
         {this.currentContent()}
+
+        <AddAccount addAccount={this.addAccount}/>
       </div>
     );
   }

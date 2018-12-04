@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class AddAccount extends Component {
+class AddAccountForm extends Component {
 	nameInput = React.createRef();
   	currentAmountInput = React.createRef();
   	suggestedInput = React.createRef();
@@ -38,4 +38,4 @@ class AddAccount extends Component {
   }
 }
 
-export default AddAccount;
+export default AddAccountForm;

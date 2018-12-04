@@ -3,7 +3,7 @@ import Header from "./Header";
 import AccountsList from "./AccountsList";
 import AccountInfo from "./AccountInfo";
 import * as api from "../api";
-import AddAccount from "./AddAccount";
+import AddAccountForm from "./AddAccountForm";
 
 const pushState = (obj, url) =>
   window.history.pushState(obj, "", url);
@@ -70,15 +70,18 @@ class App extends Component {
 
   addAccount = (newAccount) => {
     api.addAccount(newAccount)
-    .then(console.log({...this.state.accounts}))
-    .catch(console.error);
   };
+
+  removeAccount = (accountToRemove) => {
+    api.removeAccount(accountToRemove)
+  }
 
   currentContent() {
     if (this.state.currentAccountName) {
       return <AccountInfo 
         accountListClick={this.fetchAccountList}
         addAccount = {this.addAccount}
+        removeAccount = {this.removeAccount}
         {...this.currentAccount()} />
     } 
       return <AccountsList onAccountClick = {this.fetchAccount}
@@ -95,7 +98,7 @@ class App extends Component {
         <Header message={this.pageHeader()} />
         {this.currentContent()}
 
-        <AddAccount addAccount={this.addAccount}/>
+        <AddAccountForm addAccount={this.addAccount}/>
       </div>
     );
   }

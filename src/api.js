@@ -19,3 +19,8 @@ export const removeAccount = (accountName) => {
 	return axios.delete(`/api/accounts/${accountName}`)
 		.then(resp => resp.data);
 };
+
+export const addWithdrawal = (newWithdrawal) => {
+	return axios.post(`/api/accounts/Fun/`, {...newWithdrawal})
+	.then(()=> console.log(newWithdrawal))
+};

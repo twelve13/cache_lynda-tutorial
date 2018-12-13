@@ -68,13 +68,15 @@ class App extends Component {
     }
   }
 
+  //CRUD step 2: create functions in App.js and include in currentContent()
+
   addAccount = (newAccount) => {
     api.addAccount(newAccount)
   };
 
   removeAccount = (accountToRemove) => {
     api.removeAccount(accountToRemove)
-  }
+  };
 
   currentContent() {
     if (this.state.currentAccountName) {

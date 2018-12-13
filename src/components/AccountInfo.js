@@ -4,6 +4,7 @@ import App from "./App";
 
 class AccountInfo extends Component {
 	render() {
+
 		//a new account gets created without withdrawals or deposits so have to specify something here, an empty array, or else can't map on undefined
 		const withdrawals = (this.props.withdrawals? this.props.withdrawals: [])
 		const withdrawalsList = withdrawals.map(withdrawal => <Item key={withdrawal._id} name={withdrawal.name} amount={withdrawal.amount} date={withdrawal.date} />)

@@ -2,22 +2,22 @@ import React, {Component} from "react";
 
 class AddAccountForm extends Component {
 	nameInput = React.createRef();
-  	currentAmountInput = React.createRef();
-  	suggestedInput = React.createRef();
-  	notesInput = React.createRef();
+  currentAmountInput = React.createRef();
+  suggestedInput = React.createRef();
+  notesInput = React.createRef();
 
-  	createAccount = (event) => {
-    	event.preventDefault();
+  createAccount = (event) => {
+    event.preventDefault();
 
-    	const newAccount = {
-    		name: this.nameInput.current.value,
-    		current_amount: parseFloat(this.currentAmountInput.current.value),
-    		suggested: parseFloat(this.suggestedInput.current.value),
-    		notes: this.notesInput.current.value
-    	}
+    const newAccount = {
+    	name: this.nameInput.current.value,
+    	current_amount: parseFloat(this.currentAmountInput.current.value),
+    	suggested: parseFloat(this.suggestedInput.current.value),
+    	notes: this.notesInput.current.value
+    }
 
-    	this.props.addAccount(newAccount);
-  	}
+    this.props.addAccount(newAccount);
+  }
 
 
 	render() {

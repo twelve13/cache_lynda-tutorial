@@ -2,6 +2,7 @@ import express from "express";
 import { MongoClient } from "mongodb";
 import assert from "assert";
 import config from "../config";
+import * as models from "../db/schema";
 
 let mdb;
 
@@ -29,25 +30,40 @@ router.get("/accounts", (req, res) => {
 		});
 });
 
+//CRUD step 1: set up server routing
+
 router.get("/accounts/:accountName", (req, res) => {
-	mdb.collection("accounts")
-		.findOne({ name: req.params.accountName })
+	models.Account
+		.find({ name: req.params.accountName })
 		.then(account => res.send(account))
 		.catch(console.error)
 });
 
 router.post("/accounts", (req, res) => {
-	mdb.collection("accounts")
-		.insertOne(req.body)
+	models.Account
+		.create(req.body)
 		.then(account => res.json(account))	
 		.catch(console.error)
 });
 
 router.delete("/accounts/:accountName", (req, res) => {
-	mdb.collection("accounts")
-		.deleteOne({name: req.params.accountName})
+	models.Account
+		.findOneAndRemove({ name: req.params.accountName })
 		.then(()=> res.json({success: true}))
 		.catch(console.error)
+});
+
+router.post("/accounts/:accountName", (req, res) => {
+	models.Account
+		.findOne({ name: req.params.accountName })
+		.then((account) => {
+			models.Withdrawal.create(req.body).then((withdrawal) => {
+				account.withdrawals.push(withdrawal)
+				account.save().then((account) => {
+					res.json(account);
+				});
+			});
+		});
 });
 
 export default router;

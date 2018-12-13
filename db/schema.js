@@ -9,7 +9,7 @@ mongoose.connection.on("error", err => {
 })
 
 mongoose.connection.once("open", () => {
-	console.log("database has been connected");
+	console.log("mongoose database has been connected");
 });
 
 const WithdrawalSchema = new mongoose.Schema({
@@ -35,14 +35,10 @@ const AccountSchema = new mongoose.Schema({
 });
 
 
-var Account = mongoose.model("Account", AccountSchema);
-var Withdrawal = mongoose.model("Withdrawal", WithdrawalSchema);
-var Deposit = mongoose.model("Deposit", DepositSchema);
+export var Account = mongoose.model("Account", AccountSchema);
+export var Withdrawal = mongoose.model("Withdrawal", WithdrawalSchema);
+export var Deposit = mongoose.model("Deposit", DepositSchema);
 
-module.exports = {
-	Account: Account,
-	Withdrawal: Withdrawal,
-	Deposit: Deposit
-};
+
 
 //in terminal run $node db/schema.js

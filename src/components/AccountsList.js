@@ -6,7 +6,7 @@ const AccountsList = ({ accounts, onAccountClick }) => (
 		{Object.keys(accounts).map(accountName => 
 			<Account 
 				key={accountName} 
-				onClick={onAccountClick}
+				onAccountClick={onAccountClick}
 				{...accounts[accountName]}/>)}
 	</div>
 )

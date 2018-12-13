@@ -28,8 +28,9 @@ class AccountInfo extends Component {
 				</div>
 				<div onClick={removeAccount}>Remove this account</div>
 			
-			<div>
-				<div>Withdrawals</div>
+			<div className="account-info__section">
+				<div className="account-info__section--title">Withdrawals</div>
+				<div>Name Amount Date</div>
 				<div>{withdrawalsList}</div>
 			</div>
 			<div>

@@ -42,3 +42,14 @@ body {
 .account-info__name {
   font-size: 36px;
   text-align: center; }
+
+.account-info__section {
+  border-bottom: solid 2px black; }
+  .account-info__section--title {
+    font-size: 30px;
+    font-weight: bold; }
+
+.account-info__item {
+  display: flex;
+  font-size: 24px;
+  justify-content: space-between; }

@@ -12,6 +12,7 @@ const onPopState = handler => {
   window.onpopstate = handler;
 }
 
+
 class App extends Component {
 	state = this.props.initialData;
 
@@ -29,13 +30,13 @@ class App extends Component {
 
   fetchAccount = (accountName) => {
     pushState(
-      { currentAccountName: accountName },
+      { currentAccountName: "accountName" },
       `/account/${accountName}`
     );
 
     api.fetchAccount(accountName).then(account => {
       this.setState({
-        currentAccountName: account.name,
+        currentAccountName: accountName,
         accounts: {
           ...this.state.accounts,
           [account.name]: account

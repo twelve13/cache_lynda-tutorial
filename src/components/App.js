@@ -28,6 +28,20 @@ class App extends Component {
     onPopState(null);
   }
 
+  fetchAccountList = () => {
+    pushState(
+      { currentAccountName: null },
+      "/"
+    );
+
+    api.fetchAccountList().then(accounts => {
+      this.setState({
+        currentAccountName: null,
+        accounts
+      });
+    });
+  };
+
   fetchAccount = (accountName) => {
     pushState(
       { currentAccountName: "accountName" },
@@ -41,20 +55,6 @@ class App extends Component {
           ...this.state.accounts,
           [account.name]: account
         }
-      });
-    });
-  };
-
-  fetchAccountList = () => {
-    pushState(
-      { currentAccountName: null },
-      "/"
-    );
-
-    api.fetchAccountList().then(accounts => {
-      this.setState({
-        currentAccountName: null,
-        accounts
       });
     });
   };
@@ -79,6 +79,10 @@ class App extends Component {
     api.removeAccount(accountToRemove)
   };
 
+  addWithdrawalFunction = (addToThisAccount, newWithdrawal) => {
+    api.addWithdrawal(addToThisAccount, newWithdrawal)
+  };
+
   currentContent() {
     if (this.state.currentAccountName) {
       return <AccountInfo 
@@ -87,9 +91,10 @@ class App extends Component {
         removeAccount = {this.removeAccount}
         {...this.currentAccount()} />
     } 
-      return <AccountsList onAccountClick = {this.fetchAccount}
-      accounts = {this.state.accounts} />
-    
+      return <AccountsList 
+        onAccountClickfromApp = {this.fetchAccount}
+        accountsfromApp = {this.state.accounts}
+        addWithdrawalfromApp = {this.addWithdrawalFunction} />
   }
 
   render() {

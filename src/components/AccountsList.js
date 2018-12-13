@@ -1,13 +1,14 @@
 import React from "react";
 import Account from "./Account";
 
-const AccountsList = ({ accounts, onAccountClick }) => (
+const AccountsList = ({ accountsfromApp, onAccountClickfromApp, addWithdrawalfromApp }) => (
 	<div className="accounts-wrapper">
-		{Object.keys(accounts).map(accountName => 
+		{Object.keys(accountsfromApp).map(accountName => 
 			<Account 
 				key={accountName} 
-				onAccountClick={onAccountClick}
-				{...accounts[accountName]}/>)}
+				onAccountClick={onAccountClickfromApp}
+				addWithdrawal={addWithdrawalfromApp}
+				{...accountsfromApp[accountName]}/>)}
 	</div>
 )
 

@@ -14,9 +14,11 @@ class AddWithdrawalForm extends Component {
       amount: parseFloat(this.amountInput.current.value),
       name: this.nameInput.current.value,
       date: this.dateInput.current.value
-    }
+    } 
 
-    this.props.addWithdrawal(newWithdrawal);
+    const addToThisAccount = this.props.parentAccount;
+
+    this.props.addWithdrawal(addToThisAccount, newWithdrawal);
   }
 
 

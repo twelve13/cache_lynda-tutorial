@@ -30,7 +30,7 @@ router.get("/accounts", (req, res) => {
 		});
 });
 
-//CRUD step 1: set up server routing
+//CRUD step 1: set up server routing, test with Postman
 
 router.get("/accounts/:accountName", (req, res) => {
 	models.Account

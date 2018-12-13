@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from "./Header";
 import AccountsList from "./AccountsList";
 import AccountInfo from "./AccountInfo";
-import * as api from "../api";
 import AddAccountForm from "./AddAccountForm";
+import * as api from "../api";
 
 const pushState = (obj, url) =>
   window.history.pushState(obj, "", url);
@@ -20,7 +20,7 @@ class App extends Component {
     onPopState((event) => {
       this.setState({
         currentAccountName: (event.state || {}).currentAccountName
-      })
+      });
     });
   }
 
@@ -44,7 +44,7 @@ class App extends Component {
 
   fetchAccount = (accountName) => {
     pushState(
-      { currentAccountName: "accountName" },
+      { currentAccountName: accountName },
       `/account/${accountName}`
     );
 
@@ -69,10 +69,17 @@ class App extends Component {
     }
   }
 
-  //CRUD step 2: create functions in App.js and include in currentContent()
+  //CRUD step 2: create functions in App.js
 
   addAccount = (newAccount) => {
-    api.addAccount(newAccount)
+    api.addAccount(newAccount).then(resp =>
+      this.setState({
+        accounts: {
+          ...this.state.accounts,
+          [resp._id]: resp
+        }
+      })
+    )
   };
 
   removeAccount = (accountToRemove) => {
@@ -87,7 +94,6 @@ class App extends Component {
     if (this.state.currentAccountName) {
       return <AccountInfo 
         accountListClick={this.fetchAccountList}
-        addAccount = {this.addAccount}
         removeAccount = {this.removeAccount}
         {...this.currentAccount()} />
     } 

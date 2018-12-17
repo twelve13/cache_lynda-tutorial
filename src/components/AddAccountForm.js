@@ -26,6 +26,7 @@ class AddAccountForm extends Component {
     return (
     	
       <div className="create-account">
+        <div>Add Account</div>
         <form onSubmit={this.createAccount}>
           <input type="text" placeholder="Account Name" ref={this.nameInput} />
           <input type="text" placeholder="Current Amount" ref={this.currentAmountInput} />

@@ -11,13 +11,15 @@ body {
 
 .accounts-wrapper {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .account {
 	border: solid 2px black;
 	border-radius: 20px;
+	box-sizing: border-box;
 	margin: 20px 10px;
-	padding: 10px;
+	padding: 15px;
 	text-align: center;
 	width: 225px;
 
@@ -48,6 +50,21 @@ body {
 		padding-bottom: 10px;
 	}
 
+	&__withdrawals {
+	    background-color: #f09;
+	    box-sizing: border-box;
+	    padding: 10px 20px;
+
+	    form {
+	        margin: 0;
+	        width: 100%;
+
+	        button {
+	            margin-top: 5px;
+	        }
+	    }
+	}
+
 	&__log {
 		padding-top: 10px;
 	}
@@ -59,18 +76,56 @@ body {
 		text-align: center;
 	}
 	&__section {
-	    border-bottom: solid 2px black;
+
 	        &--title {
-	          font-size: 30px;
-	          font-weight: bold;
+	            background-color: black;
+	            color: white;
+	            font-size: 30px;
+	            font-weight: bold;
+	        }
+
+	        &--columns {
+	        	box-sizing: border-box;
+	            display: flex;
+	            font-size: 24px;
+	            padding: 0 20px;
+
+	            div {
+	                text-decoration: underline;
+	                width: 33%;
+	            }
+	        }
+
+	        &--list {
+	            box-sizing: border-box;
+	            padding: 0 20px;
 	        }
 	}
 	&__item {
-		display: flex;
+	    display: flex;
 		font-size: 24px;
-		justify-content: space-between;
+
+		div {
+		    width: 33%;
+		}
+	}
+	&__delete {
+	    display: flex;
+	    justify-content: flex-end;
 	}
 }
+
+.create-account {
+	border: solid 2px black;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px 10px;
+	padding: 15px;
+	text-align: center;
+	width: 225px;
+}
+
+
 
 
 

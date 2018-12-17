@@ -110,7 +110,6 @@ class App extends Component {
     //for specific account page
     if (this.state.currentAccountName) {
       return <AccountInfo 
-        accountListClick={this.fetchAccountList}
         removeAccount = {this.removeAccount}
         {...this.currentAccount()} />
     }
@@ -132,7 +131,7 @@ class App extends Component {
     return (
     	
       <div className="App">
-        <Header />
+        <Header accountListClick={this.fetchAccountList}/>
         {this.currentContent()}
       </div>
     );

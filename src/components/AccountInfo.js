@@ -23,22 +23,26 @@ class AccountInfo extends Component {
 				<div className="account-info__name">
 					{this.props.name}
 				</div>
-				<div className="link" onClick={this.props.accountListClick}>
-					Return to home
-				</div>
-				<div onClick={removeAccount}>Remove this account</div>
+				<div className="account-info__delete"><div onClick={removeAccount}>Delete account</div></div>
 			
-			<div className="account-info__section">
-				<div className="account-info__section--title">Withdrawals</div>
-				<div>Name Amount Date</div>
-				<div>{withdrawalsList}</div>
-			</div>
-			<div>
-				<div>Deposits</div>
-				<div>{depositsList}</div>
-			</div>
-
-
+				<div className="account-info__section">
+					<div className="account-info__section--title">Withdrawals</div>
+					<div className="account-info__section--columns">
+						<div>Name</div>
+						<div>Amount</div>
+						<div>Date</div>
+					</div>
+					<div className="account-info__section--list">{withdrawalsList}</div>
+				</div>
+				<div className="account-info__section">
+					<div className="account-info__section--title">Deposits</div>
+					<div className="account-info__section--columns">
+						<div>Name</div>
+						<div>Amount</div>
+						<div>Date</div>
+					</div>
+					<div>{depositsList}</div>
+				</div>
 			</div>
 		)
 	}

@@ -1,9 +1,14 @@
-import React from "react";
+import React, {Component} from "react";
+import App from "./app";
 
-const Header = ({message}) => (
-	<header className = "header">
-		<div>Cache</div>
-	</header>
-);
+class Header extends Component {
+	render() {
+		return (
+			<header className = "header" onClick={this.props.accountListClick}>
+				<div>Cache</div>
+			</header>
+		)
+	}
+}
 
 export default Header;

@@ -62,12 +62,6 @@ class App extends Component {
     return this.state.accounts[this.state.currentAccountName];
   }
 
-  // pageHeader() {
-  //   if (this.state.currentAccountName) {
-  //     return this.currentAccount().name;
-  //   }
-  // }
-
   //CRUD step 2: create functions in App.js
 
   addAccount = (newAccount) => {
@@ -101,7 +95,15 @@ class App extends Component {
   };
 
   addWithdrawalFunction = (addToThisAccount, newWithdrawal) => {
-    api.addWithdrawal(addToThisAccount, newWithdrawal)
+    const accountsState = {...this.state.accounts};
+    
+    api.addWithdrawal(addToThisAccount, newWithdrawal).then(resp =>     
+      accountsState[addToThisAccount] = resp,
+
+      this.setState({
+        accounts: accountsState
+      })
+    )
   };
 
   currentContent() {

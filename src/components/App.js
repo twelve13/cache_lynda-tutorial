@@ -52,8 +52,7 @@ class App extends Component {
       this.setState({
         currentAccountName: accountName,
         accounts: {
-          ...this.state.accounts,
-          [account.name]: account
+          ...this.state.accounts
         }
       });
     });
@@ -63,11 +62,11 @@ class App extends Component {
     return this.state.accounts[this.state.currentAccountName];
   }
 
-  pageHeader() {
-    if (this.state.currentAccountName) {
-      return this.currentAccount().name;
-    }
-  }
+  // pageHeader() {
+  //   if (this.state.currentAccountName) {
+  //     return this.currentAccount().name;
+  //   }
+  // }
 
   //CRUD step 2: create functions in App.js
 
@@ -76,14 +75,29 @@ class App extends Component {
       this.setState({
         accounts: {
           ...this.state.accounts,
-          [resp._id]: resp
+          [resp.name]: resp
         }
       })
     )
   };
 
   removeAccount = (accountToRemove) => {
-    api.removeAccount(accountToRemove)
+
+    const accountsState = {...this.state.accounts};
+    delete accountsState[accountToRemove];
+
+    //set currentAccountName to null so currentContent function will return the accounts list
+    api.removeAccount(accountToRemove).then(resp =>
+      this.setState({
+        accounts: accountsState,
+        currentAccountName: null
+      })
+    )
+
+    pushState(
+      { currentAccountName: null },
+      "/"
+    );
   };
 
   addWithdrawalFunction = (addToThisAccount, newWithdrawal) => {
@@ -91,16 +105,23 @@ class App extends Component {
   };
 
   currentContent() {
+    //for specific account page
     if (this.state.currentAccountName) {
       return <AccountInfo 
         accountListClick={this.fetchAccountList}
         removeAccount = {this.removeAccount}
         {...this.currentAccount()} />
-    } 
-      return <AccountsList 
-        onAccountClickfromApp = {this.fetchAccount}
-        accountsfromApp = {this.state.accounts}
-        addWithdrawalfromApp = {this.addWithdrawalFunction} />
+    }
+    //for accounts overview page
+    return (
+      <div>
+        <AccountsList 
+          onAccountClickfromApp = {this.fetchAccount}
+          accountsfromApp = {this.state.accounts}
+          addWithdrawalfromApp = {this.addWithdrawalFunction} />
+        <AddAccountForm addAccount={this.addAccount}/>
+      </div>
+    )
   }
 
   render() {
@@ -109,10 +130,8 @@ class App extends Component {
     return (
     	
       <div className="App">
-        <Header message={this.pageHeader()} />
+        <Header />
         {this.currentContent()}
-
-        <AddAccountForm addAccount={this.addAccount}/>
       </div>
     );
   }

@@ -58,7 +58,8 @@ router.post("/accounts/:accountName", (req, res) => {
 		.findOne({ name: req.params.accountName })
 		.then((account) => {
 			models.Withdrawal.create(req.body).then((withdrawal) => {
-				account.withdrawals.push(withdrawal)
+				account.withdrawals.push(withdrawal);
+				account.current_amount = account.current_amount - req.body.amount;
 				account.save().then((account) => {
 					res.json(account);
 				});

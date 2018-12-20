@@ -1,15 +1,23 @@
-import React from "react";
+import React, {Component} from "react";
 import Account from "./Account";
+import App from "./app";
 
-const AccountsList = ({ accountsfromApp, onAccountClickfromApp, addWithdrawalfromApp }) => (
+
+
+class AccountsList extends Component {
+	render() {
+		return (
 	<div className="accounts-wrapper">
-		{Object.keys(accountsfromApp).map(accountName => 
+		{Object.keys(this.props.accountsfromApp).map(accountName => 
 			<Account 
 				key={accountName} 
-				onAccountClick={onAccountClickfromApp}
-				addWithdrawal={addWithdrawalfromApp}
-				{...accountsfromApp[accountName]}/>)}
+				onAccountClick={this.props.onAccountClickfromApp}
+				addWithdrawal={this.props.addWithdrawalfromApp}
+				{...this.props.accountsfromApp[accountName]}
+			/>)}
 	</div>
-)
+		)
+	}
+}
 
 export default AccountsList;

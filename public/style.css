@@ -38,15 +38,17 @@ body {
   .account__notes {
     border-bottom: solid 2px black;
     padding-bottom: 10px; }
-  .account__withdrawals {
+  .account__withdrawals, .account__deposits {
     background-color: #f09;
     box-sizing: border-box;
     padding: 10px 20px; }
-    .account__withdrawals form {
+    .account__withdrawals form, .account__deposits form {
       margin: 0;
       width: 100%; }
-      .account__withdrawals form button {
+      .account__withdrawals form button, .account__deposits form button {
         margin-top: 5px; }
+  .account__deposits {
+    background-color: #0fa; }
   .account__log {
     padding-top: 10px; }
 

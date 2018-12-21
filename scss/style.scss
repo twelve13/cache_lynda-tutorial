@@ -50,7 +50,7 @@ body {
 		padding-bottom: 10px;
 	}
 
-	&__withdrawals {
+	&__withdrawals, &__deposits {
 	    background-color: #f09;
 	    box-sizing: border-box;
 	    padding: 10px 20px;
@@ -63,6 +63,10 @@ body {
 	            margin-top: 5px;
 	        }
 	    }
+	}
+
+	&__deposits {
+	  background-color: #0fa;
 	}
 
 	&__log {

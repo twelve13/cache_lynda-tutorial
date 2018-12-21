@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import Item from "./Item";
 import App from "./App";
 
+//CRUD step 5: pass form props down
+
 class AccountInfo extends Component {
 	render() {
 
@@ -41,7 +43,7 @@ class AccountInfo extends Component {
 						<div>Amount</div>
 						<div>Date</div>
 					</div>
-					<div>{depositsList}</div>
+					<div className="account-info__section--list">{depositsList}</div>
 				</div>
 			</div>
 		)

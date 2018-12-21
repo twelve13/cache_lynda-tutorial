@@ -2,15 +2,15 @@ import React, {Component} from "react";
 
 //CRUD step 4: Hook up form to get user input
 
-class AddWithdrawalForm extends Component {
+class AddDepositForm extends Component {
   amountInput = React.createRef();
   nameInput = React.createRef();
   dateInput = React.createRef();
 
-  createWithdrawal = (event) => {
+  createDeposit = (event) => {
     event.preventDefault();
 
-    const newWithdrawal = {
+    const newDeposit = {
       amount: parseFloat(this.amountInput.current.value),
       name: this.nameInput.current.value,
       date: this.dateInput.current.value
@@ -18,7 +18,7 @@ class AddWithdrawalForm extends Component {
 
     const addToThisAccount = this.props.parentAccount;
 
-    this.props.addWithdrawal(addToThisAccount, newWithdrawal);
+    this.props.addDeposit(addToThisAccount, newDeposit);
   }
 
 
@@ -27,9 +27,9 @@ class AddWithdrawalForm extends Component {
  
     return (
     	
-      <div className="create-withdrawal">
-        <form onSubmit={this.createWithdrawal}>
-          <input type="text" placeholder="Amount spent" ref={this.amountInput} />
+      <div className="create-deposit">
+        <form onSubmit={this.createDeposit}>
+          <input type="text" placeholder="Amount" ref={this.amountInput} />
           <input type="text" placeholder="For" ref={this.nameInput} />
           <input type="text" placeholder="Date" ref={this.dateInput} />
           <button type="submit">Submit</button>
@@ -39,4 +39,4 @@ class AddWithdrawalForm extends Component {
   }
 }
 
-export default AddWithdrawalForm;
+export default AddDepositForm;

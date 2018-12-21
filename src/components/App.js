@@ -62,7 +62,7 @@ class App extends Component {
     return this.state.accounts[this.state.currentAccountName];
   }
 
-  //CRUD step 2: create functions in App.js
+  //CRUD step 3: create functions in App.js
 
   addAccount = (newAccount) => {
     api.addAccount(newAccount).then(resp =>
@@ -106,6 +106,18 @@ class App extends Component {
     )
   };
 
+  addDepositFunction = (addToThisAccount, newDeposit) => {
+    const accountsState = {...this.state.accounts};
+    
+    api.addDeposit(addToThisAccount, newDeposit).then(resp =>     
+      accountsState[addToThisAccount] = resp,
+
+      this.setState({
+        accounts: accountsState
+      })
+    )
+  };
+
   currentContent() {
     //for specific account page
     if (this.state.currentAccountName) {
@@ -119,7 +131,8 @@ class App extends Component {
         <AccountsList 
           onAccountClickfromApp = {this.fetchAccount}
           accountsfromApp = {this.state.accounts}
-          addWithdrawalfromApp = {this.addWithdrawalFunction} />
+          addWithdrawalfromApp = {this.addWithdrawalFunction}
+          addDepositfromApp = {this.addDepositFunction} />
         <AddAccountForm addAccount={this.addAccount}/>
       </div>
     )

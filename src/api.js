@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//CRUD step 2: set up axios calls
+
 export const fetchAccount = (accountName) => {
 	return axios.get(`/api/accounts/${accountName}`)
 		.then(resp => resp.data);
@@ -21,6 +23,11 @@ export const removeAccount = (accountName) => {
 };
 
 export const addWithdrawal = (accountName, newWithdrawal) => {
-	return axios.post(`/api/accounts/${accountName}`, {...newWithdrawal})
+	return axios.post(`/api/accounts/${accountName}/withdrawals`, {...newWithdrawal})
+	.then(resp => resp.data);
+};
+
+export const addDeposit = (accountName, newDeposit) => {
+	return axios.post(`/api/accounts/${accountName}/deposits`, {...newDeposit})
 	.then(resp => resp.data);
 };

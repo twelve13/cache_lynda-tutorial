@@ -53,7 +53,7 @@ router.delete("/accounts/:accountName", (req, res) => {
 		.catch(console.error)
 });
 
-router.post("/accounts/:accountName", (req, res) => {
+router.post("/accounts/:accountName/withdrawals", (req, res) => {
 	models.Account
 		.findOne({ name: req.params.accountName })
 		.then((account) => {
@@ -67,4 +67,17 @@ router.post("/accounts/:accountName", (req, res) => {
 		});
 });
 
+router.post("/accounts/:accountName/deposits", (req, res) => {
+	models.Account
+		.findOne({ name: req.params.accountName })
+		.then((account) => {
+			models.Deposit.create(req.body).then((deposit) => {
+				account.deposits.push(deposit);
+				account.current_amount = account.current_amount + req.body.amount;
+				account.save().then((account) => {
+					res.json(account);
+				});
+			});
+		});
+});
 export default router;

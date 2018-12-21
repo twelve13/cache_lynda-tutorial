@@ -52,6 +52,13 @@ body {
   .account__log {
     padding-top: 10px; }
 
+.enough-funds {
+  display: none; }
+
+.insufficient-funds {
+  color: red;
+  display: block; }
+
 .account-info__name {
   font-size: 36px;
   text-align: center; }

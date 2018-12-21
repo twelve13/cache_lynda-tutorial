@@ -74,6 +74,15 @@ body {
 	}
 }
 
+.enough-funds {
+	display: none;
+}
+
+.insufficient-funds {
+    color: red;
+	display: block;
+}
+
 .account-info {
 	&__name {
 		font-size: 36px;

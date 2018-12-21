@@ -6,16 +6,26 @@ import * as api from "../api";
 //CRUD step 5: pass form props down
 
 class Account extends Component {
-	state = {currentAmountOfAccount: this.props.current_amount};
+	state = {
+		currentAmountOfAccount: this.props.current_amount,
+		enoughFunds: true
+	};
 
 	goToLog = () => {
 		this.props.onAccountClick(this.props.name);
 	}
 
   updateCurrentAmountwithWithdrawalAmount = (newWithdrawal) => {
+  	if(this.props.current_amount >= newWithdrawal.amount){
       this.setState({
         currentAmountOfAccount: this.props.current_amount - newWithdrawal.amount
       })
+  	}
+  	else {
+  		this.setState({
+  			enoughFunds: false
+  		})
+  	}
   }
 
   updateCurrentAmountwithDepositAmount = (newDeposit) => {
@@ -56,6 +66,7 @@ class Account extends Component {
 					<AddWithdrawalForm addWithdrawal = {addTheWithdrawal} parentAccount = {this.props.name}/>
 				</div>
 				<div className="account__log" onClick = {this.goToLog}>Log</div>
+				<div className={this.state.enoughFunds? "enough-funds" : "insufficient-funds"}>Not enough funds!</div>
 			</div>
 		);
 	}

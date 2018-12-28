@@ -14,6 +14,7 @@ class AccountsList extends Component {
 				onAccountClick={this.props.onAccountClickfromApp}
 				addWithdrawal={this.props.addWithdrawalfromApp}
 				addDeposit={this.props.addDepositfromApp}
+				setIncomingSource={this.props.setIncomingSource}
 				{...this.props.accountsfromApp[accountName]}
 			/>)}
 	</div>

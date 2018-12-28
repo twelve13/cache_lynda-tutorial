@@ -3,6 +3,7 @@ import Header from "./Header";
 import AccountsList from "./AccountsList";
 import AccountInfo from "./AccountInfo";
 import AddAccountForm from "./AddAccountForm";
+import IncomingFunds from "./IncomingFunds";
 import * as api from "../api";
 
 const pushState = (obj, url) =>
@@ -94,6 +95,13 @@ class App extends Component {
     );
   };
 
+  addIncomingFunds = incomingFunds => {
+    this.setState({
+      incomingFunds: incomingFunds.amount,
+      incomingSource: incomingFunds.source
+    })
+  };
+
   addWithdrawalFunction = (addToThisAccount, newWithdrawal) => {
     const accountsState = {...this.state.accounts};
     
@@ -108,12 +116,14 @@ class App extends Component {
 
   addDepositFunction = (addToThisAccount, newDeposit) => {
     const accountsState = {...this.state.accounts};
+    const incomingFundsState = this.state.incomingFunds;
     
     api.addDeposit(addToThisAccount, newDeposit).then(resp =>     
       accountsState[addToThisAccount] = resp,
 
       this.setState({
-        accounts: accountsState
+        accounts: accountsState,
+        incomingFunds: incomingFundsState - newDeposit.amount
       })
     )
   };
@@ -128,11 +138,14 @@ class App extends Component {
     //for accounts overview page
     return (
       <div>
+        <div>Incoming Funds: ${this.state.incomingFunds}</div>
+        <IncomingFunds addIncomingFunds = {this.addIncomingFunds}/>
         <AccountsList 
           onAccountClickfromApp = {this.fetchAccount}
           accountsfromApp = {this.state.accounts}
           addWithdrawalfromApp = {this.addWithdrawalFunction}
-          addDepositfromApp = {this.addDepositFunction} />
+          addDepositfromApp = {this.addDepositFunction}
+          setIncomingSource = {this.state.incomingSource} />
         <AddAccountForm addAccount={this.addAccount}/>
       </div>
     )

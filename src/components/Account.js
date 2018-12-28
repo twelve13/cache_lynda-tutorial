@@ -59,7 +59,7 @@ class Account extends Component {
 				<div className="account__notes">Notes: {this.props.notes}</div>
 				<div className="account__deposits">
 					<div>Deposits</div>
-					<AddDepositForm addDeposit = {addTheDeposit} parentAccount = {this.props.name}/>
+					<AddDepositForm addDeposit = {addTheDeposit} parentAccount = {this.props.name} setIncomingSource = {this.props.setIncomingSource}/>
 				</div>
 				<div className="account__withdrawals">
 					<div>Withdrawals</div>

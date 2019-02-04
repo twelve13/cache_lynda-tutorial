@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AddWithdrawalForm from "./AddWithdrawalForm";
 import AddDepositForm from "./AddDepositForm";
+import EditAccountForm from "./EditAccountForm";
 import * as api from "../api";
 
 //CRUD step 5: pass form props down
@@ -12,8 +13,15 @@ class Account extends Component {
 	};
 
 	goToLog = () => {
-		this.props.onAccountClick(this.props.name);
-	}
+		this.props.goToLogPage(this.props.name);
+	};
+
+	editAccount = (editedAccount) => {
+		this.props.editAccount(this.props.name, editedAccount);
+		this.setState({
+        	currentAmountOfAccount: editedAccount.current_amount
+      })
+	};
 
   updateCurrentAmountwithWithdrawalAmount = (newWithdrawal) => {
   	if(this.props.current_amount >= newWithdrawal.amount){
@@ -66,6 +74,7 @@ class Account extends Component {
 					<AddWithdrawalForm addWithdrawal = {addTheWithdrawal} parentAccount = {this.props.name}/>
 				</div>
 				<div className="account__log" onClick = {this.goToLog}>Log</div>
+				<EditAccountForm editAccount={this.editAccount} />
 				<div className={this.state.enoughFunds? "enough-funds" : "insufficient-funds"}>Not enough funds!</div>
 			</div>
 		);

@@ -31,6 +31,7 @@ router.get("/accounts", (req, res) => {
 });
 
 //CRUD step 1: set up server routing, test with Postman
+//http://localhost:8080/api/accounts/example
 
 router.get("/accounts/:accountName", (req, res) => {
 	models.Account
@@ -43,6 +44,13 @@ router.post("/accounts", (req, res) => {
 	models.Account
 		.create(req.body)
 		.then(account => res.json(account))	
+		.catch(console.error)
+});
+
+router.put("/accounts/:accountName", (req, res) => {
+	models.Account
+		.findOneAndUpdate({name: req.params.accountName}, req.body)
+		.then(account => res.json(account))
 		.catch(console.error)
 });
 

@@ -11,7 +11,8 @@ class AccountsList extends Component {
 		{Object.keys(this.props.accountsfromApp).map(accountName => 
 			<Account 
 				key={accountName} 
-				onAccountClick={this.props.onAccountClickfromApp}
+				goToLogPage={this.props.goToLogPage}
+				editAccount={this.props.editAccount}
 				addWithdrawal={this.props.addWithdrawalfromApp}
 				addDeposit={this.props.addDepositfromApp}
 				setIncomingSource={this.props.setIncomingSource}

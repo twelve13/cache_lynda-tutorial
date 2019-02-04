@@ -17,6 +17,11 @@ export const addAccount = (newAccount) => {
 		.then(resp => resp.data);
 } 
 
+export const editAccount = (accountName, editedAccount) => {
+	return axios.put(`/api/accounts/${accountName}`, {...editedAccount})
+		.then(resp => resp.data);
+}
+
 export const removeAccount = (accountName) => {
 	return axios.delete(`/api/accounts/${accountName}`)
 		.then(resp => resp.data);

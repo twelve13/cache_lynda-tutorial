@@ -76,6 +76,18 @@ class App extends Component {
     )
   };
 
+  editAccount = (accountToEdit, editedAccount) => {
+    const accountsState = {...this.state.accounts};
+    accountsState[accountToEdit]["name"] = editedAccount["name"];
+    accountsState[accountToEdit]["suggested"] = editedAccount["suggested"];
+    accountsState[accountToEdit]["notes"] = editedAccount["notes"];
+    api.editAccount(accountToEdit, editedAccount).then(resp =>
+      this.setState({
+                accounts: accountsState
+      })
+    )
+  };
+
   removeAccount = (accountToRemove) => {
 
     const accountsState = {...this.state.accounts};
@@ -141,12 +153,13 @@ class App extends Component {
         <div>Incoming Funds: ${this.state.incomingFunds}</div>
         <IncomingFunds addIncomingFunds = {this.addIncomingFunds}/>
         <AccountsList 
-          onAccountClickfromApp = {this.fetchAccount}
+          goToLogPage = {this.fetchAccount}
+          editAccount = {this.editAccount}
           accountsfromApp = {this.state.accounts}
           addWithdrawalfromApp = {this.addWithdrawalFunction}
           addDepositfromApp = {this.addDepositFunction}
           setIncomingSource = {this.state.incomingSource} />
-        <AddAccountForm addAccount={this.addAccount}/>
+        <AddAccountForm addAccount={this.addAccount} />
       </div>
     )
   }

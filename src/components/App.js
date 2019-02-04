@@ -79,6 +79,7 @@ class App extends Component {
   editAccount = (accountToEdit, editedAccount) => {
     const accountsState = {...this.state.accounts};
     accountsState[accountToEdit]["name"] = editedAccount["name"];
+    accountsState[accountToEdit]["current_amount"] = editedAccount["current_amount"];
     accountsState[accountToEdit]["suggested"] = editedAccount["suggested"];
     accountsState[accountToEdit]["notes"] = editedAccount["notes"];
     api.editAccount(accountToEdit, editedAccount).then(resp =>
@@ -89,14 +90,20 @@ class App extends Component {
   };
 
   removeAccount = (accountToRemove) => {
+    
 
-    const accountsState = {...this.state.accounts};
+     const accountsState = {...this.state.accounts};
+    
+    const incomingFundsState = this.state.incomingFunds;
+    const freedUpMoney = accountsState[accountToRemove]["current_amount"];
     delete accountsState[accountToRemove];
+  
 
     //set currentAccountName to null so currentContent function will return the accounts list
     api.removeAccount(accountToRemove).then(resp =>
       this.setState({
         accounts: accountsState,
+           incomingFunds: incomingFundsState + freedUpMoney,
         currentAccountName: null
       })
     )
@@ -116,28 +123,37 @@ class App extends Component {
 
   addWithdrawalFunction = (addToThisAccount, newWithdrawal) => {
     const accountsState = {...this.state.accounts};
-    
-    api.addWithdrawal(addToThisAccount, newWithdrawal).then(resp =>     
-      accountsState[addToThisAccount] = resp,
+    //don't allow a withdrawal if there isn't enough to cover it from the account's current funds
+    if(accountsState[addToThisAccount]["current_amount"]>= newWithdrawal.amount){
+      api.addWithdrawal(addToThisAccount, newWithdrawal).then(resp =>     
+        accountsState[addToThisAccount] = resp,
 
-      this.setState({
-        accounts: accountsState
-      })
-    )
+        this.setState({
+          accounts: accountsState
+        })
+      )
+    } else {
+        alert("not enough funds in account")
+    }
   };
 
   addDepositFunction = (addToThisAccount, newDeposit) => {
     const accountsState = {...this.state.accounts};
     const incomingFundsState = this.state.incomingFunds;
-    
-    api.addDeposit(addToThisAccount, newDeposit).then(resp =>     
-      accountsState[addToThisAccount] = resp,
+    //don't allow a deposit if there isn't enough to cover it from the Incoming Funds
+    if(incomingFundsState >= newDeposit.amount){
+      accountsState[addToThisAccount]["current_amount"]=accountsState[addToThisAccount]["current_amount"]+newDeposit.amount;
 
-      this.setState({
-        accounts: accountsState,
-        incomingFunds: incomingFundsState - newDeposit.amount
-      })
-    )
+      api.addDeposit(addToThisAccount, newDeposit).then(resp =>     
+        accountsState[addToThisAccount] = resp,
+        this.setState({
+          accounts: accountsState,
+          incomingFunds: incomingFundsState - newDeposit.amount
+        })
+      )
+    } else {
+        alert("not enough incoming funds")
+      }; 
   };
 
   currentContent() {

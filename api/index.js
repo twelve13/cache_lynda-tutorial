@@ -66,14 +66,11 @@ router.post("/accounts/:accountName/withdrawals", (req, res) => {
 		.findOne({ name: req.params.accountName })
 		.then((account) => {
 			models.Withdrawal.create(req.body).then((withdrawal) => {
-				if (account.current_amount >= req.body.amount){
-					account.status="Good";
-					account.withdrawals.push(withdrawal);
-					account.current_amount = account.current_amount - req.body.amount;
-					account.save().then((account) => {
-						res.json(account);
-					});
-				}
+				account.withdrawals.push(withdrawal);
+				account.current_amount = account.current_amount - req.body.amount;
+				account.save().then((account) => {
+					res.json(account);
+				});
 			});
 		});
 });

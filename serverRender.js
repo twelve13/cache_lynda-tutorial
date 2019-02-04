@@ -23,7 +23,8 @@ const getInitialData = (accountName, apiData) => {
 		};
 	}
 	return {
-		accounts: apiData.accounts
+		accounts: apiData.accounts,
+		incomingFunds: 0
 	};
 };
 

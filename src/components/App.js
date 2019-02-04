@@ -90,10 +90,7 @@ class App extends Component {
   };
 
   removeAccount = (accountToRemove) => {
-    
-
-     const accountsState = {...this.state.accounts};
-    
+    const accountsState = {...this.state.accounts};
     const incomingFundsState = this.state.incomingFunds;
     const freedUpMoney = accountsState[accountToRemove]["current_amount"];
     delete accountsState[accountToRemove];
@@ -125,9 +122,10 @@ class App extends Component {
     const accountsState = {...this.state.accounts};
     //don't allow a withdrawal if there isn't enough to cover it from the account's current funds
     if(accountsState[addToThisAccount]["current_amount"]>= newWithdrawal.amount){
+      accountsState[addToThisAccount]["current_amount"]=accountsState[addToThisAccount]["current_amount"]-newWithdrawal.amount;
+
       api.addWithdrawal(addToThisAccount, newWithdrawal).then(resp =>     
         accountsState[addToThisAccount] = resp,
-
         this.setState({
           accounts: accountsState
         })

@@ -15,8 +15,13 @@ class AddAccountForm extends Component {
     	suggested: parseFloat(this.suggestedInput.current.value),
     	notes: this.notesInput.current.value
     }
+    if(this.nameInput.current.value!=""){
+      this.props.addAccount(newAccount);
+    } else {
+      alert("you must enter a name for the account")
+    }
 
-    this.props.addAccount(newAccount);
+    document.getElementById("create-account-form").reset();
   }
 
 
@@ -27,7 +32,7 @@ class AddAccountForm extends Component {
     	
       <div className="create-account">
         <div>Add Account</div>
-        <form onSubmit={this.createAccount}>
+        <form id="create-account-form" onSubmit={this.createAccount}>
           <input type="text" placeholder="Account Name" ref={this.nameInput} />
           <input type="text" placeholder="Current Amount" ref={this.currentAmountInput} />
           <input type="text" placeholder="Suggested Amount" ref={this.suggestedInput} />

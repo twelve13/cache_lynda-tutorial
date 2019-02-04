@@ -15,8 +15,11 @@ class EditAccountForm extends Component {
     	suggested: parseFloat(this.editSuggestedInput.current.value),
     	notes: this.editNotesInput.current.value
     }
-
-    this.props.editAccount(editedAccount);
+    if(this.editNameInput.current.value!=""){
+      this.props.editAccount(editedAccount);
+    }else {
+      alert("you must enter a name for the account")
+    }
   }
 
 

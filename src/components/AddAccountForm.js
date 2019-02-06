@@ -21,7 +21,7 @@ class AddAccountForm extends Component {
       alert("you must enter a name for the account")
     }
 
-    document.getElementById("create-account-form").reset();
+    event.target.reset();
   }
 
 
@@ -32,7 +32,7 @@ class AddAccountForm extends Component {
     	
       <div className="create-account">
         <div>Add Account</div>
-        <form id="create-account-form" onSubmit={this.createAccount}>
+        <form onSubmit={this.createAccount}>
           <input type="text" placeholder="Account Name" ref={this.nameInput} />
           <input type="text" placeholder="Current Amount" ref={this.currentAmountInput} />
           <input type="text" placeholder="Suggested Amount" ref={this.suggestedInput} />

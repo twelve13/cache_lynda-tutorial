@@ -19,6 +19,8 @@ class AddWithdrawalForm extends Component {
     const addToThisAccount = this.props.parentAccount;
 
     this.props.addWithdrawal(addToThisAccount, newWithdrawal);
+
+    event.target.reset();
   }
 
 

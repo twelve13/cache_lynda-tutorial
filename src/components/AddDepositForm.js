@@ -16,7 +16,13 @@ class AddDepositForm extends Component {
 
     const addToThisAccount = this.props.parentAccount;
 
-    this.props.addDeposit(addToThisAccount, newDeposit);
+    if(newDeposit.amount>=0){
+      this.props.addDeposit(addToThisAccount, newDeposit);
+      event.target.reset();
+
+    } else (
+      alert("please enter a positive amount")
+    )
   }
 
 
@@ -26,7 +32,7 @@ class AddDepositForm extends Component {
     return (
     	
       <div className="create-deposit">
-        <form onSubmit={this.createDeposit}>
+        <form className="add-deposit-form" onSubmit={this.createDeposit}>
           <input type="text" placeholder="Amount" ref={this.amountInput} />
           <button type="submit">Submit</button>
         </form>

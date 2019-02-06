@@ -15,7 +15,7 @@ class IncomingFunds extends Component {
 
     if(incomingFunds["amount"]>=1){
       this.props.addIncomingFunds(incomingFunds);
-      document.getElementById("add-incoming-funds-form").reset();
+      event.target.reset();
       document.getElementById("add-incoming__form").classList.remove("show");
     } else {
       alert("You must enter a positive number amount")

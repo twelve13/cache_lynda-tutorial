@@ -7,6 +7,36 @@ body {
   font-size: 72px;
   padding: 5px 20px; }
 
+#funds-allocate {
+  font-size: 26px;
+  padding-top: 10px;
+  text-align: center; }
+
+#add-incoming {
+  display: flex;
+  font-size: 16px;
+  justify-content: center; }
+  #add-incoming__button {
+    align-self: center;
+    background-color: #0bf;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 5px;
+    width: 150px; }
+  #add-incoming__form {
+    display: none;
+    margin-left: 10px; }
+    #add-incoming__form input {
+      padding: 6px 3px; }
+    #add-incoming__form button {
+      padding: 6px; }
+    #add-incoming__form.show {
+      align-items: center;
+      display: flex; }
+
+#add-incoming-funds-form {
+  margin-block-end: 0; }
+
 .accounts-wrapper {
   display: flex;
   flex-wrap: wrap; }

@@ -100,7 +100,7 @@ class App extends Component {
     api.removeAccount(accountToRemove).then(resp =>
       this.setState({
         accounts: accountsState,
-           incomingFunds: incomingFundsState + freedUpMoney,
+        incomingFunds: incomingFundsState + freedUpMoney,
         currentAccountName: null
       })
     )
@@ -112,8 +112,9 @@ class App extends Component {
   };
 
   addIncomingFunds = incomingFunds => {
+    const incomingFundsState = this.state.incomingFunds;
     this.setState({
-      incomingFunds: incomingFunds.amount,
+      incomingFunds: incomingFundsState + incomingFunds.amount,
       incomingSource: incomingFunds.source
     })
   };
@@ -138,7 +139,7 @@ class App extends Component {
   addDepositFunction = (addToThisAccount, newDeposit) => {
     const accountsState = {...this.state.accounts};
     const incomingFundsState = this.state.incomingFunds;
-    //don't allow a deposit if there isn't enough to cover it from the Incoming Funds
+    //don't allow a deposit if there isn't enough to cover it from the Funds to allocate
     if(incomingFundsState >= newDeposit.amount){
       accountsState[addToThisAccount]["current_amount"]=accountsState[addToThisAccount]["current_amount"]+newDeposit.amount;
 
@@ -150,9 +151,13 @@ class App extends Component {
         })
       )
     } else {
-        alert("not enough incoming funds")
+        alert("not enough funds to allocate");
       }; 
   };
+
+  showIncomingForm = () => {
+    document.getElementById("add-incoming__form").classList.add("show");
+  }
 
   currentContent() {
     //for specific account page
@@ -164,8 +169,13 @@ class App extends Component {
     //for accounts overview page
     return (
       <div>
-        <div>Incoming Funds: ${this.state.incomingFunds}</div>
-        <IncomingFunds addIncomingFunds = {this.addIncomingFunds}/>
+        <div id="funds-allocate">
+          <div>Funds to allocate: ${this.state.incomingFunds}</div>
+          <div id="add-incoming">
+            <div id="add-incoming__button" onClick={this.showIncomingForm}>Add incoming funds</div>
+            <IncomingFunds addIncomingFunds = {this.addIncomingFunds}/>
+          </div>
+        </div>
         <AccountsList 
           goToLogPage = {this.fetchAccount}
           editAccount = {this.editAccount}
@@ -177,6 +187,8 @@ class App extends Component {
       </div>
     )
   }
+
+
 
   render() {
     

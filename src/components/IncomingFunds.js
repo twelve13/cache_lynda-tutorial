@@ -13,19 +13,22 @@ class IncomingFunds extends Component {
       source: this.incomingSourceInput.current.value
     } 
 
-    this.props.addIncomingFunds(incomingFunds);
+    if(incomingFunds["amount"]>=1){
+      this.props.addIncomingFunds(incomingFunds);
+      document.getElementById("add-incoming-funds-form").reset();
+      document.getElementById("add-incoming__form").classList.remove("show");
+    } else {
+      alert("You must enter a positive number amount")
+    }
   }
-
-
-
 
 
 	render() {
 		return (
-			<div>
-        		<form onSubmit={this.addIncomingFunds}>
-          			<input type="text" placeholder="amount" ref={this.incomingAmountInput} />
-          			<input type="text" placeholder="from" ref={this.incomingSourceInput} />
+			<div id="add-incoming__form">
+        		<form id="add-incoming-funds-form" onSubmit={this.addIncomingFunds}>
+          			<input type="text" placeholder="Amount" ref={this.incomingAmountInput} />
+          			<input type="text" placeholder="From" ref={this.incomingSourceInput} />
           			<button type="submit">Submit</button>
         		</form>
 			</div>

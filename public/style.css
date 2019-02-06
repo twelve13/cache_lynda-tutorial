@@ -80,7 +80,19 @@ body {
   .account__deposits {
     background-color: #0fa; }
   .account__log {
+    cursor: pointer;
+    margin-bottom: 5px;
     padding-top: 10px; }
+
+.edit-account {
+  cursor: pointer; }
+  .edit-account__form {
+    display: none; }
+    .edit-account__form.show {
+      display: block; }
+    .edit-account__form button {
+      margin-top: 5px;
+      padding: 2px 15px; }
 
 .account-info__name {
   font-size: 36px;

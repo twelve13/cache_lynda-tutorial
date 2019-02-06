@@ -113,8 +113,27 @@ body {
 	}
 
 	&__log {
+		cursor: pointer;
+		margin-bottom: 5px;
 		padding-top: 10px;
 	}
+}
+
+.edit-account {
+	cursor: pointer;
+	
+	&__form {
+		display: none;
+
+		&.show {
+			display: block;
+		}
+
+		button {
+			margin-top: 5px;
+			padding: 2px 15px;
+		}
+	}	
 }
 
 .account-info {

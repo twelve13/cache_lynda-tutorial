@@ -6,6 +6,12 @@ class EditAccountForm extends Component {
   editSuggestedInput = React.createRef();
   editNotesInput = React.createRef();
 
+  targetForm = React.createRef();
+
+  showForm = () => {
+    (this.targetForm).current.classList.add("show");
+  }
+
   editAccount = (event) => {
     event.preventDefault();
 
@@ -17,6 +23,8 @@ class EditAccountForm extends Component {
     }
     if(this.editNameInput.current.value!=""){
       this.props.editAccount(editedAccount);
+      event.target.reset();
+      (this.targetForm).current.classList.remove("show");
     }else {
       alert("you must enter a name for the account")
     }
@@ -29,8 +37,8 @@ class EditAccountForm extends Component {
     return (
     	
       <div className="edit-account">
-        <div>Edit Account</div>
-        <form onSubmit={this.editAccount}>
+        <div onClick={this.showForm}>Edit</div>
+        <form className="edit-account__form" onSubmit={this.editAccount} ref={this.targetForm}>
           <input type="text" placeholder="Account Name" ref={this.editNameInput} />
           <input type="text" placeholder="Current Amount" ref={this.editCurrentAmountInput} />
           <input type="text" placeholder="Suggested Amount" ref={this.editSuggestedInput} />
